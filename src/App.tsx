@@ -1,24 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {DocumentNode, gql, useQuery} from "@apollo/client";
+
+const EXCHANGE_RATES: DocumentNode = gql`
+    query{
+        characters{
+            info{
+                count,
+                pages,
+                next,
+                prev
+            }
+            results{
+                id,
+                name,
+                status,
+                species,
+                type,
+                gender,
+                image,
+                created
+            }
+        }
+    }
+`;
 
 function App() {
+  const exchange_rates_query = useQuery(EXCHANGE_RATES);
+  console.log('exchange_rates_query => ', exchange_rates_query);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      React-ApolloClient
     </div>
   );
 }
